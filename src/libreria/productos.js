@@ -18,7 +18,7 @@ const products = [
     categoria: "Maquinas",
     precio: 20000,
     descripcion:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos fuga harum hic assumenda exercitationem iusto dolore quae accusantium sed corporis.",
-    img:"./assets/magic-clip-cordless.webp",
+    img:"https://wahlargentina.vteximg.com.br/arquivos/ids/155426-1000-1000/magic-clip-cordless-08148-048-clipper.jpg?v=637947190977630000",
     stock:5,
 
 },
@@ -28,7 +28,7 @@ const products = [
     categoria: "Maquinas",
     precio: 20000,
     descripcion: " Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos fuga harum hic assumenda exercitationem iusto dolore quae accusantium sed corporis.م",
-    img:"https://www.google.com/url?sa=i&url=https%3A%2F%2Fteklife.mx%2Fproducts%2Fmaquina-cortadora-profesional-wahl-legend-cordless&psig=AOvVaw0IrJWfh2DlbVEx9SST6y8A&ust=1689814197808000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCIigpsrGmYADFQAAAAAdAAAAABAF",
+    img:"https://wahlargentina.vteximg.com.br/arquivos/ids/155426-1000-1000/magic-clip-cordless-08148-048-clipper.jpg?v=637947190977630000",
     stock:5,
 
 },
@@ -39,6 +39,46 @@ const products = [
     precio: 20000,
     descripcion: " Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos fuga harum hic assumenda exercitationem iusto dolore quae accusantium sed corporis.",  
     img:"https://wahlargentina.vteximg.com.br/arquivos/ids/155426-1000-1000/magic-clip-cordless-08148-048-clipper.jpg?v=637947190977630000",
+    stock:5,
+
+},
+{
+    id:5,
+    title:"tijera de corte ",
+    categoria: "Tijeras",
+    precio: 2000,
+    descripcion: " Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos fuga harum hic assumenda exercitationem iusto dolore quae accusantium sed corporis.",  
+    img:"https://d3ugyf2ht6aenh.cloudfront.net/stores/758/494/products/tijera-profesional-55-jaguar-pre-style-relax-slice1-639c68b0f9f0cf645e16847678490540-640-0.webp",
+    stock:5,
+
+},
+{
+    id:6,
+    title:"tijera de corte ",
+    categoria: "Tijeras",
+    precio: 2000,
+    descripcion: " Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos fuga harum hic assumenda exercitationem iusto dolore quae accusantium sed corporis.",  
+    img:"https://d3ugyf2ht6aenh.cloudfront.net/stores/758/494/products/tijera-profesional-55-jaguar-pre-style-relax-slice1-639c68b0f9f0cf645e16847678490540-640-0.webp",
+    stock:5,
+
+},
+{
+    id:7,
+    title:"tijera de corte ",
+    categoria: "Tijeras",
+    precio: 2000,
+    descripcion: " Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos fuga harum hic assumenda exercitationem iusto dolore quae accusantium sed corporis.",  
+    img:"https://d3ugyf2ht6aenh.cloudfront.net/stores/758/494/products/tijera-profesional-55-jaguar-pre-style-relax-slice1-639c68b0f9f0cf645e16847678490540-640-0.webp",
+    stock:5,
+
+},
+{
+    id:9,
+    title:"tijera de corte ",
+    categoria: "Tijeras",
+    precio: 2000,
+    descripcion: " Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos fuga harum hic assumenda exercitationem iusto dolore quae accusantium sed corporis.",  
+    img:"https://d3ugyf2ht6aenh.cloudfront.net/stores/758/494/products/tijera-profesional-55-jaguar-pre-style-relax-slice1-639c68b0f9f0cf645e16847678490540-640-0.webp",
     stock:5,
 
 },
@@ -53,7 +93,7 @@ export const getProducts = (id) => {
         setTimeout(()=> {
             res(products)
 
-        },2000)
+        },500)
     });
 };
 

@@ -1,4 +1,5 @@
 import { Item } from "../Item/Item";
+import "./ItemListConteiner.css"
 
 export const ItemListConteiner = ({products}) => (
     <div className="item-list">
@@ -6,7 +7,7 @@ export const ItemListConteiner = ({products}) => (
         <Item
         key={product.id}
         img={product.img}
-        category={product.category}
+        categoria={product.categoria}
         title={product.title}
         precio={product.precio}
           

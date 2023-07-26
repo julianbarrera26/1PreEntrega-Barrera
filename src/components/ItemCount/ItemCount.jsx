@@ -10,13 +10,13 @@ export const ItemCount = ({stock, onAdd}) => {
         if(count > 1)setCount(count - 1)
     }
     return(
-        <div>
-        <div>
+        <div className='item-count'>
+        <div className='item-count_buttons'>
         <button onClick={()=> handleSub()}>-</button>
         <span>{count}</span>
         <button onClick={()=> handleSum()}>+</button>
         </div>
-        <button disabled={!stock} onClick={()=> onAdd(count)}>Agregar al carrito</button>
+        <button className='item-count_add' disabled={!stock} onClick={()=> onAdd(count)}>Agregar al carrito</button>
         </div>
     );
 };

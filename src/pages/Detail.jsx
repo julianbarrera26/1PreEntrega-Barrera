@@ -2,21 +2,26 @@ import { useEffect, useState } from "react"
 import { ItemCount } from "../components/ItemCount/ItemCount";
 import { Alert } from "react-bootstrap";
 import { getProduct } from "../libreria/productos";
+import { useParams } from "react-router-dom";
 
 export const Detail = () => {
+    const {id} = useParams();
     const[product, setProduct] = useState({});
     useEffect(()=>{
-        getProduct()
+        getProduct(+id)
         .then(res => {
             setProduct(res)
         })
 
         },[]);
-    return (
+
+        if(!Object.keys(product).length) return
+    
+        return (
         <div className="container">
             <div className="detail">
                 <div className="detail_img">
-                    <img src="{product.img}" alt="" />
+                    <img src={product.img} alt="" />
 
                 </div>
                 <div className="detail_info">
