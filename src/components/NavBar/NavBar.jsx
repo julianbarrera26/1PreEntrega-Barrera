@@ -17,9 +17,9 @@ export const NavBar = () => {
               <Nav className="me-auto">
                 <Nav.Link href="#features">Turnos</Nav.Link>
                 <NavDropdown title="Shop" id="collasible-nav-dropdown">
-                  <NavLink to={"categoria/Maquinas"} >Maquinas</NavLink>
-                  <NavLink to={"categoria/Tijeras"} >Tijeras</NavLink>
+                  <NavLink to={"categoria/maquinas"} >Maquinas</NavLink>
                   <NavDropdown.Divider />
+                  <NavLink to={"categoria/tijeras"} >Tijeras</NavLink>                  
                 </NavDropdown>
               </Nav>
               <Nav>

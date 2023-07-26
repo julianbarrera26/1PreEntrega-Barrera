@@ -49,7 +49,7 @@ const products = [
     precio: 2000,
     descripcion: " Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos fuga harum hic assumenda exercitationem iusto dolore quae accusantium sed corporis.",  
     img:"https://d3ugyf2ht6aenh.cloudfront.net/stores/758/494/products/tijera-profesional-55-jaguar-pre-style-relax-slice1-639c68b0f9f0cf645e16847678490540-640-0.webp",
-    stock:5,
+    stock:3,
 
 },
 {
@@ -91,7 +91,7 @@ export const getProducts = (id) => {
 
     return new Promise((res)=>{
         setTimeout(()=> {
-            res(products)
+            res(_products)
 
         },500)
     });

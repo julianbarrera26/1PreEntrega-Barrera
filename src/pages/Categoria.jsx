@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { getProducts } from "../libreria/productos";
 import { ItemListConteiner } from "../components/ItemListConteiner/ItemListConteiner";
 
-export const categoria = () => {
+export const Categoria = () => {
     const {id} = useParams();
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
