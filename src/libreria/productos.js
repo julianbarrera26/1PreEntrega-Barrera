@@ -1,5 +1,3 @@
-import { LoremIpsum, loremIpsum } from "lorem-ipsum"
-import { ListGroupItem } from "react-bootstrap"
 
 const products = [
     {
@@ -91,9 +89,9 @@ export const getProducts = (id) => {
 
     return new Promise((res)=>{
         setTimeout(()=> {
-            res(_products)
+            res(_products);
 
-        },500)
+        },500);
     });
 };
 
@@ -102,8 +100,8 @@ export const getProduct = (id) => {
     
     return new Promise((res)=>{
         setTimeout(()=> {
-            res(products[0])
+            res(product);
 
-        },1000)
+        },1000);
     });
 };

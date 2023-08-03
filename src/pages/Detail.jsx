@@ -6,22 +6,21 @@ import { useParams } from "react-router-dom";
 
 export const Detail = () => {
     const {id} = useParams();
-    const[product, setProduct] = useState({});
+    const[product, setProduct] = useState({})
     useEffect(()=>{
-        getProduct(+id)
-        .then(res => {
+        getProduct(+id).then((res) => {
             setProduct(res)
-        })
+        });
 
         },[]);
 
-        if(!Object.keys(product).length) return
+        if(!Object.keys(product).length) return 
     
         return (
         <div className="container">
             <div className="detail">
                 <div className="detail_img">
-                    <img src={product.img} alt="" />
+                    <img src={product.img} />
 
                 </div>
                 <div className="detail_info">
@@ -34,7 +33,7 @@ export const Detail = () => {
                             })}
                     </span>
                     <span className="detail_info-stock">¡ quedan {product.stock}!</span>
-                    <ItemCount stock={5} onAdd={() => Alert("Comprados")}/>              
+                    <ItemCount stock={product.stock} onAdd={() => Alert("Comprados")}/>              
 
                     
                 </div>
