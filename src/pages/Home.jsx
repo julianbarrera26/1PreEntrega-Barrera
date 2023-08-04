@@ -18,7 +18,7 @@ export const Home = () => {
 
 return (
     <div>
-        <h5>{isLoading ? "Cargando" : "Cargado"} </h5>
+        <h5>{isLoading ? "Cargando" : "Todos los productos"} </h5>
         <ItemListConteiner products={products}/>
     </div>
 );

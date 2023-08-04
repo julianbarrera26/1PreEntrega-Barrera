@@ -16,8 +16,7 @@ export const Item = ({
         </div>
         <div className="item_detalles">
           <div className="item_info">
-            <span className="item_categoria">{categoria}</span>
-            <span className="item_title">{title}</span>
+          <span className="item_title">{title}</span>
           </div>
           <span className="item_precio">${precio}</span>
         </div>

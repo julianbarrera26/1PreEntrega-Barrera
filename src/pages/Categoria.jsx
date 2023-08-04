@@ -22,7 +22,7 @@ export const Categoria = () => {
 return (
     <div>
     <div>
-        <h5>{isLoading ? "Cargando" : "Cargado"} </h5>
+        <h5>{isLoading ? "Cargando" : "Listo" } </h5>
         <ItemListConteiner products={products}/>
     </div>
     </div>
