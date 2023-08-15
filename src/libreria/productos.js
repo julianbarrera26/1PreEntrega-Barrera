@@ -1,9 +1,8 @@
 
 const products = [
     {
-        id:1,
         title:"clipper wahl ",
-        categoria: "Maquinas",
+        categoria: "maquinas",
         precio: 20000,
         descripcion:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos fuga harum hic assumenda exercitationem iusto dolore quae accusantium sed corporis.",
         img:"https://wahlargentina.vteximg.com.br/arquivos/ids/155426-1000-1000/magic-clip-cordless-08148-048-clipper.jpg?v=637947190977630000",
@@ -11,9 +10,8 @@ const products = [
 
 },
 {
-    id:2,
     title:"clipper wahl ",
-    categoria: "Maquinas",
+    categoria: "maquinas",
     precio: 20000,
     descripcion:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos fuga harum hic assumenda exercitationem iusto dolore quae accusantium sed corporis.",
     img:"https://wahlargentina.vteximg.com.br/arquivos/ids/155426-1000-1000/magic-clip-cordless-08148-048-clipper.jpg?v=637947190977630000",
@@ -21,9 +19,8 @@ const products = [
 
 },
 {
-    id:3,
     title:"clipper wahl ",
-    categoria: "Maquinas",
+    categoria: "maquinas",
     precio: 20000,
     descripcion: " Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos fuga harum hic assumenda exercitationem iusto dolore quae accusantium sed corporis.م",
     img:"https://wahlargentina.vteximg.com.br/arquivos/ids/155426-1000-1000/magic-clip-cordless-08148-048-clipper.jpg?v=637947190977630000",
@@ -31,9 +28,8 @@ const products = [
 
 },
 {
-    id:4,
     title:"clipper wahl ",
-    categoria: "Maquinas",
+    categoria: "maquinas",
     precio: 20000,
     descripcion: " Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos fuga harum hic assumenda exercitationem iusto dolore quae accusantium sed corporis.",  
     img:"https://wahlargentina.vteximg.com.br/arquivos/ids/155426-1000-1000/magic-clip-cordless-08148-048-clipper.jpg?v=637947190977630000",
@@ -41,9 +37,8 @@ const products = [
 
 },
 {
-    id:5,
     title:"tijera de corte ",
-    categoria: "Tijeras",
+    categoria: "tijeras",
     precio: 2000,
     descripcion: " Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos fuga harum hic assumenda exercitationem iusto dolore quae accusantium sed corporis.",  
     img:"https://d3ugyf2ht6aenh.cloudfront.net/stores/758/494/products/tijera-profesional-55-jaguar-pre-style-relax-slice1-639c68b0f9f0cf645e16847678490540-640-0.webp",
@@ -51,9 +46,8 @@ const products = [
 
 },
 {
-    id:6,
     title:"tijera de corte ",
-    categoria: "Tijeras",
+    categoria: "tijeras",
     precio: 2000,
     descripcion: " Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos fuga harum hic assumenda exercitationem iusto dolore quae accusantium sed corporis.",  
     img:"https://d3ugyf2ht6aenh.cloudfront.net/stores/758/494/products/tijera-profesional-55-jaguar-pre-style-relax-slice1-639c68b0f9f0cf645e16847678490540-640-0.webp",
@@ -61,9 +55,8 @@ const products = [
 
 },
 {
-    id:7,
     title:"tijera de corte ",
-    categoria: "Tijeras",
+    categoria: "tijeras",
     precio: 2000,
     descripcion: " Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos fuga harum hic assumenda exercitationem iusto dolore quae accusantium sed corporis.",  
     img:"https://d3ugyf2ht6aenh.cloudfront.net/stores/758/494/products/tijera-profesional-55-jaguar-pre-style-relax-slice1-639c68b0f9f0cf645e16847678490540-640-0.webp",
@@ -71,9 +64,8 @@ const products = [
 
 },
 {
-    id:9,
     title:"tijera de corte ",
-    categoria: "Tijeras",
+    categoria: "tijeras",
     precio: 2000,
     descripcion: " Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos fuga harum hic assumenda exercitationem iusto dolore quae accusantium sed corporis.",  
     img:"https://d3ugyf2ht6aenh.cloudfront.net/stores/758/494/products/tijera-profesional-55-jaguar-pre-style-relax-slice1-639c68b0f9f0cf645e16847678490540-640-0.webp",
@@ -82,26 +74,36 @@ const products = [
 },
 ];
 
-export const getProducts = (id) => {
-    const _products = id
-    ? products.filter((product) => product.categoria.toLowerCase() === id)
-    :products;
+import { collection, doc, getDocs, getDoc,addDoc, where, query } from "firebase/firestore";
+import { db } from "./config";
 
-    return new Promise((res)=>{
-        setTimeout(()=> {
-            res(_products);
+const productsRef = collection(db, "items");
 
-        },500);
-    });
-};
 
-export const getProduct = (id) => {
-    const product = products.filter((product) => product.id === id) [0];
+export const getProducts = async (categoria) => {
+    const q  = categoria
+    ? query(productsRef, where('categoria','==', categoria))
+    :productsRef;
     
-    return new Promise((res)=>{
-        setTimeout(()=> {
-            res(product);
-
-        },1000);
+    let products = [];
+    const querySnapshop = await getDocs (q);
+    querySnapshop.forEach((doc)=> {
+    products =  [...products, {...doc.data(), id: doc.id}];
     });
+    return products;
 };
+
+export const getProduct = async (id) => {
+    const document = doc(db, "items", id);
+    const docSnap = await getDoc(document);
+
+    if(docSnap.exists()) return {id: docSnap.id, ...docSnap.data()} ;
+
+    return null;
+};
+
+export const cargarData = async () => {
+    products.forEach(async(product)=>{
+        await addDoc(productsRef,product)
+    })
+}

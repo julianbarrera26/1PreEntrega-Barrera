@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getProducts } from "../libreria/productos";
+import { cargarData, getProducts } from "../libreria/productos";
 import { ItemListConteiner } from "../components/ItemListConteiner/ItemListConteiner";
 import Loader from "react-js-loader";
 

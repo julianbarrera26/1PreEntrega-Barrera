@@ -12,7 +12,7 @@ export const Detail = () => {
     const[product, setProduct] = useState({})
     const {addProduct, itemInCart} = useCartContext();
     useEffect(()=>{
-        getProduct(+id).then((res) => {
+        getProduct(id).then((res) => {
             setProduct(res)
         });
 
@@ -24,7 +24,7 @@ export const Detail = () => {
         },
         [addProduct, product]
         );
-        
+
         if(!Object.keys(product).length) return <Loader/>;
     
         return (
@@ -43,8 +43,8 @@ export const Detail = () => {
                                 maximumFractionDigits:2,
                             })}
                     </span>
-                    <span className="detail_info-stock">¡ quedan {product.stock - (itemInCart?.(+id)?.qty || 0)}</span>
-                    <ItemCount stock={product.stock} onAdd={handleAdd} />              
+                    <span className="detail_info-stock">¡ quedan {product.stock}</span>
+                    <ItemCount stock={product.stock - (itemInCart?.(id)?.qty || 0)} onAdd={handleAdd} />              
 
                     
                 </div>

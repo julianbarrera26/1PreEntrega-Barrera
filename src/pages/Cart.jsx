@@ -1,6 +1,5 @@
 import { useEffect } from "react";
-import { useCartContext } from "../state/Cart.context"
-import { Item } from "../components/Item/Item";
+import { useCartContext } from "../state/Cart.context";
 
 export const Cart = () => {
     const{ cart, cleanCart, getTotalPrice, removeProduct} = useCartContext();
@@ -9,27 +8,58 @@ export const Cart = () => {
         console.log({cart});
     }, [cart]);
     return (
-    <div>
-        <button className="cart__item-button" onClick={cleanCart}>
+        <div className="cart">
+            <div className="container cart__container">{cart.length ?
+        <>
+            <div className="cart__item" style={{ border: "none" }}>
+            <button className="cart__item-button" onClick={cleanCart}>
                 Vaciar carrito
             </button>
-        <span>
-            Total {" "}
-            {getTotalPrice.toLocaleString("es-CO",{
-                minimumFractioDigits:2,
-                maximumFractionDigits:2,
-            })}
-        </span>
-        {cart.map((item) =>(
-            <div style={{
-            padding: 50,
-            background: "#121212",
-            margin: "10px 0",
-        }} 
-        key={item.id} onClick={()=> removeProduct(item.id)}>
-                Nombre {item.title}
             </div>
-        ))}
+            <div className="cart__products">
+            <div className="cart__item" style={{ border: "none", padding: "0 16px" }}>
+                <span>Producto</span>
+                <span>Cantidad</span>
+                <span>Precio</span>
+                <span>Subtotal</span>
+            </div>
+            {cart.map((item) => (
+                <div className="cart__item" key={item.id}>
+                <span>{item.title}</span>
+  
+                <span>{item.qty}</span>
+                <span>
+                    $
+                    {item.precio.toLocaleString("es-CO", {
+                    maximumFractionDigits: 2,
+                    minimumFractionDigits: 2,
+                    })}
+                </span>
+                <span>
+                    $
+                    {(item.qty * item.precio).toLocaleString("es-CO", {
+                    maximumFractionDigits: 2,
+                    minimumFractionDigits: 2,
+                    })}
+                </span>
+                <button className="cart__item-delete" onClick={() => removeProduct(item.id)}>
+                </button>
+                </div>
+            ))}
+            </div>
+            <div className="cart__item" style={{ border: "none" }}>
+            <div className="cart__total">
+                <span>Total</span>{" "}
+                <span>
+                $
+                {getTotalPrice.toLocaleString("es-CO", {
+                maximumFractionDigits: 2,
+                minimumFractionDigits: 2,
+                })}
+                </span>
+            </div>{" "}
+            </div></>  : <h1>EL carrito esta vacio</h1>}
+        </div>
     </div>
     );
 };
