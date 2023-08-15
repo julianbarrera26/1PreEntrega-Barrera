@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { ItemCount } from "../components/ItemCount/ItemCount";
 import { Alert } from "react-bootstrap";
 import { getProduct } from "../libreria/productos";
 import { useParams } from "react-router-dom";
 import { useCartContext } from "../state/Cart.context";
 import { Item } from "../components/Item/Item";
+import Loader from "react-js-loader";
 
 export const Detail = () => {
     const {id} = useParams();
     const[product, setProduct] = useState({})
-    const {addProduct} = useCartContext();
+    const {addProduct, itemInCart} = useCartContext();
     useEffect(()=>{
         getProduct(+id).then((res) => {
             setProduct(res)
@@ -17,10 +18,14 @@ export const Detail = () => {
 
         },[]);
 
-        const handleAdd = (qty) => {
+        const handleAdd = useCallback(
+            (qty) => {
             addProduct(product, qty);
-        };
-        if(!Object.keys(product).length) return;
+        },
+        [addProduct, product]
+        );
+        
+        if(!Object.keys(product).length) return <Loader/>;
     
         return (
         <div className="container">
@@ -38,7 +43,7 @@ export const Detail = () => {
                                 maximumFractionDigits:2,
                             })}
                     </span>
-                    <span className="detail_info-stock">¡ quedan {product.stock}!</span>
+                    <span className="detail_info-stock">¡ quedan {product.stock - (itemInCart?.(+id)?.qty || 0)}</span>
                     <ItemCount stock={product.stock} onAdd={handleAdd} />              
 
                     

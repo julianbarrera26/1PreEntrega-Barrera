@@ -15,7 +15,7 @@ export const Cart = () => {
             </button>
         <span>
             Total {" "}
-            {getTotalPrice().toLocaleString("es-CO",{
+            {getTotalPrice.toLocaleString("es-CO",{
                 minimumFractioDigits:2,
                 maximumFractionDigits:2,
             })}

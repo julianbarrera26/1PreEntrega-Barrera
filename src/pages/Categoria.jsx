@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getProducts } from "../libreria/productos";
 import { ItemListConteiner } from "../components/ItemListConteiner/ItemListConteiner";
+import Loader from "react-js-loader";
 
 export const Categoria = () => {
     const {id} = useParams();
@@ -21,10 +22,13 @@ export const Categoria = () => {
 
 return (
     <div>
+    {isLoading ? (
+    <Loader type="spinner-cub" bgColor={"#FFFFFF"} title={"spinner-cub"} color={'#FFFFFF'} size={100} />
+    ) : (
     <div>
-        <h5>{isLoading ? "Cargando" : "Listo" } </h5>
         <ItemListConteiner products={products}/>
     </div>
+    )}
     </div>
 );
-}
+};  

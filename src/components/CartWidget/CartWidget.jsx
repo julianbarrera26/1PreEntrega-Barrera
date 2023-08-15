@@ -7,7 +7,7 @@ export const Cartwidget = () => {
     const navigate = useNavigate ();
     return(
     <div className="cart-widget" onClick={() => navigate ("/cart")}>
-        <img className='carrito' src={cart} alt='cart'/> <span className="cart_widget_qty">({getCartQty()})</span>
+        <img className='carrito' src={cart} alt='cart'/> {getCartQty ? <span className="cart-widget__qty">({getCartQty})</span> : null}
 
         </div>
         );
