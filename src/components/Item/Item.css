@@ -1,6 +1,5 @@
 .item{
     transition: .3s;
-    width: 100%;
     border-radius: 1px;
 }
 .item:hover{
@@ -9,28 +8,22 @@
 }   
 .item_img{
     background: #e62828;
-    width: 140%;
-    height: 100%;
+    width: 400px;
+    height: 600px;
     max-height: 80%;
     border-radius: 4px;
     overflow: hidden;
+    align-content: center;
 }
 .item_img img{
     object-fit: cover;
-    width:100%;
-    height: 100%;
+    width: 400px;;
+    height: 600px;;
+    align-content: center;
 }
 .item_info{
     margin-top: 12px;
     padding: 4px;
-}
-.item_categoria{
-    font-size: 2.5rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    margin: 2px;
-    width: 100%;
-    text-align: center;
 }
 .item_title{
     position:initial;
@@ -38,7 +31,7 @@
     font-weight: 800;
     color: rgb(13, 4, 4);
     margin: 5px;
-    width: 100%;
+    width: 50px;
     text-align: center;
 }
 

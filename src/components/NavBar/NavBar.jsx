@@ -23,10 +23,10 @@ export const NavBar = () => {
                 </NavDropdown>
               </Nav>
               <Nav>
-                <Nav.Link href="#deets">Sobre Nosotros</Nav.Link>
+                {/* <Nav.Link href="#deets">Sobre Nosotros</Nav.Link>
                 <Nav.Link eventKey={2} href="#memes">
                   Contactos
-                </Nav.Link>
+                </Nav.Link> */}
                 <Cartwidget/>
               </Nav>
             </Navbar.Collapse>

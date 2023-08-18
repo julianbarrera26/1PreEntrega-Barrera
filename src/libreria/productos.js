@@ -74,7 +74,7 @@ const products = [
 },
 ];
 
-import { collection, doc, getDocs, getDoc,addDoc, where, query } from "firebase/firestore";
+import { collection, doc, getDocs, getDoc,addDoc, where, query, updateDoc, deleteDoc, writeBatch, increment, } from "firebase/firestore";
 import { db } from "./config";
 
 const productsRef = collection(db, "items");
@@ -102,8 +102,24 @@ export const getProduct = async (id) => {
     return null;
 };
 
-export const cargarData = async () => {
-    products.forEach(async(product)=>{
-        await addDoc(productsRef,product)
+export const updateBook = async (id, item) => {
+    const newBook = await updateDoc(doc(db, "items", id), item);
+    return;
+    };
+  //ELIMINAR
+    export const deleteBook = async (id) => {
+    return await deleteDoc(doc(db, "items", id));
+    };
+  
+  //OPERACION EN LOTE
+    export const updateManyBooks = async ( items ) => {
+    const batch = writeBatch(db);
+  
+    items.forEach(({id, qty})=>{ 
+        batch.update(doc(db, "items", id), {
+        stock: increment(-qty)
+        })
     })
-}
+
+    batch.commit();
+    }
