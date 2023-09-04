@@ -34,7 +34,8 @@ export const NavBar = () => {
         </Navbar>
         </header>
       <Outlet/>
-      <footer></footer>
+      <footer>
+      </footer>
     </>
     );
 };

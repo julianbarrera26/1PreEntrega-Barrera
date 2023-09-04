@@ -2,24 +2,22 @@ import { useEffect, useState } from "react";
 import { useCartContext } from "../state/Cart.context";
 import { addOrder } from "../libreria/orders";
 import { updateManyBooks } from "../libreria/productos";
+import { Alert } from "bootstrap";
 
 export const Cart = () => {
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
     const [email, setEmail] = useState("");
     const [email2, setEmail2] = useState("");
+    const [nameError, setNameError] = useState("");
+    const [phoneError, setPhoneError] = useState("");
+    const [emailError, setEmailError] = useState("");
+    const [email2Error, setEmail2Error] = useState("");
 
     const { cart, cleanCart, getTotalPrice, removeProduct } = useCartContext();
 
     const createOrder = async () => {
-        /* 
-          CART = [ 
-            { 
-              id, description, category, img, title, qty, price
-            }
-          ]
-        */
-        /*  items: [{id, title, qty, price}], */
+        
         const items = cart.map(({ id, title, qty, precio }) => ({
             id,
             title,
@@ -28,13 +26,13 @@ export const Cart = () => {
         }));
 
         const order = {
-            buyer: { name, phone, email },
+            buyer: { name, phone, email, email2 },
             items,
             total: getTotalPrice,
         };
 
         const id = await addOrder(order);
-        console.log(id);
+        alert (id);
 
         await updateManyBooks(items);
 
@@ -42,7 +40,58 @@ export const Cart = () => {
         cleanCart();
 
     };
+        
+        const handlePhoneChange = (e) => {
+          const value = e.target.value;
+          const numericValue = value.replace(/\D/g, '');
+          setPhone(numericValue);
+      
+          // Validación del número de teléfono
+          if (value.length < 10) {
+            setPhoneError('El número de teléfono debe tener al menos 10 dígitos');
+          } else {
+            setPhoneError('');
+          }
+        };
+      
+        const handleEmailChange = (e) => {
+          const value = e.target.value;
+          setEmail(value);
+      
+          // Validación del correo electrónico
+          const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+          if (!emailRegex.test(value)) {
+            setEmailError('Correo electrónico no válido');
+          } else {
+            setEmailError('');
+          }
+        };
 
+        const handleConfirmEmailChange = (e) => {
+          const value = e.target.value;
+          setEmail2(value);
+      
+          // Validación del correo electrónico repetido
+          if (value !== email) {
+            setEmail2Error('Los correos electrónicos no coinciden');
+          } else {
+            setEmail2Error('');
+          }
+        };
+      
+        const handleNameChange = (e) => {
+          const value = e.target.value;
+          setName(value);
+      
+          // Validación del nombre 
+          if (value.length < 6) {
+            setNameError('El nombre debe tener al menos 6 caracteres');
+          } else {
+            setNameError('');
+          }
+        };
+
+       
 
     return (
       <div className="cart">
@@ -106,35 +155,40 @@ export const Cart = () => {
             <div className="form">
               <div>
                 <span>Nombre</span>
-                <input
+                <input type="text"
+                  value={name}
                   className="form__input"
                   placeholder="Nombre"
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={handleNameChange}
                 />
+                {nameError && <p style={{ color: 'red' }}>{nameError}</p>}
               </div>
               <div>
                 <span>Correo</span>
-                <input
+                <input type="text" 
+                value={email}
                   className="form__input"
                   placeholder="Correo"
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
+                  onChange={handleEmailChange}/>
+                  {emailError && <p style={{ color: 'red' }}>{emailError}</p>}  
+                </div>
               <div>
                 <span>Repetir correo</span>
                 <input
+                  value={email2}
                   className="form__input"
                   placeholder="Repetir correo"
-                  onChange={(e) => setEmail2(e.target.value)}
-                />
+                  onChange={handleConfirmEmailChange}/>
+                {email2Error && <p style={{ color: 'red' }}>{email2Error}</p>}
               </div>
               <div>
                 <span>Teléfono</span>
                 <input
+                value={phone}
                   className="form__input"
                   placeholder="Teléfono"
-                  onChange={(e) => setPhone(e.target.value)}
-                />
+                  onChange={handlePhoneChange}/>
+                {phoneError && <p style={{ color: 'red' }}>{phoneError}</p>}
               </div>
               <button
                 className="cart__item-button form__button"
@@ -147,7 +201,7 @@ export const Cart = () => {
         ) : (
           <h1>EL carrito esta vacio</h1>
         )}
-         </div>
+        </div>
     </div>
   );
-        };
+};
